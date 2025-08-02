@@ -7,8 +7,22 @@ import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 import { IconSymbol } from '@/components/ui/IconSymbol';
+import { Button } from '@react-navigation/elements';
+import { useEffect, useState } from 'react';
 
 export default function TabTwoScreen() {
+
+  const [count, setCount] = useState<number>(0)
+
+  function counted() {
+    setCount((prev: number) => prev + 1)
+  }
+
+   
+  useEffect(() => {
+    console.log(count)
+  },[count])
+  
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
@@ -23,9 +37,10 @@ export default function TabTwoScreen() {
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title">Explore</ThemedText>
       </ThemedView>
-      <ThemedText>This app includes example code to help you get started.</ThemedText>
+      <ThemedText>This app includes example code to help you get started. {count}</ThemedText>
       <Collapsible title="File-based routing">
         <ThemedText>
+        <Button onPress={counted}>Count</Button>
           This app has two screens:{' '}
           <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> and{' '}
           <ThemedText type="defaultSemiBold">app/(tabs)/explore.tsx</ThemedText>
