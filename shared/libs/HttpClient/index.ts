@@ -7,8 +7,15 @@ export interface IHttpParams {
   method: string;
 }
 
+export interface HttpResponse {
+  input: any
+  headers: any,
+  body: any,
+  status: number,
+};
+
 export class HttpClient {
-  public async request(input: IHttpParams) {
+  public async request(input: IHttpParams) : Promise<HttpResponse> {
     const result: any = {
       input: {
         ...input,
@@ -25,6 +32,10 @@ export class HttpClient {
         body: input.body,
       });
 
+      console.log({
+        response,
+      });
+
       result.status = response.status;
       result.headers = response.headers;
 
@@ -34,14 +45,11 @@ export class HttpClient {
 
       if (contentType?.includes("application/json")) {
         data = await response.json();
-      } else if (contentType?.includes("text/plain")) {
-        data = {
-          text: await response.text(),
-        };
       } else {
+        const text = await response.text();
         data = {
-          text: await response.text(),
-        };
+          text
+        }
       }
 
       result.body = data;

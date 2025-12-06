@@ -28,12 +28,12 @@ export class GutembergApi {
       method: "get",
     });
 
-    const pageLength = 1000;
-    const start = (page - 1) * pageLength;
-    const end = page * pageLength;
+    // const pageLength = 1000;
+    // const start = (page - 1) * pageLength;
+    // const end = page * pageLength;
 
-    const textResult = body.slice(start, end);
+    // const textResult = body.slice(start, end);
 
-    return textResult;
+    return body;
   }
 }
